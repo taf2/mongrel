@@ -94,7 +94,7 @@ class HandlersTest < Test::Unit::TestCase
   def test_deflate
     Net::HTTP.start("localhost", 9998) do |h|
       # Test that no accept-encoding returns a non-deflated response
-      req = h.get("/dumb")
+      req = h.get("/dumb", {"Accept-Encoding" => "plain"})
       assert(
         !req['Content-Encoding'] ||
         !req['Content-Encoding'].include?('deflate'))
